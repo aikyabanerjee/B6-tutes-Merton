@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>B6 Tutorial — Aikya Banerjee</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@400;600;700&display=swap">
+
+<style>
+:root {
+  --navy:    #1E3A7B;
+  --maroon:  #7B1210;
+  --bg:      #FFFFFF;
+  --surface: #F5F7FA;
+  --border:  #D4D9E8;
+  --text:    #18192A;
+  --muted:   #697080;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --navy:    #829ED8;
+    --maroon:  #D68080;
+    --bg:      #111318;
+    --surface: #191C26;
+    --border:  #2A2E40;
+    --text:    #E0E4F0;
+    --muted:   #8890A8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+    --navy:    #829ED8;
+    --maroon:  #D68080;
+    --bg:      #111318;
+    --surface: #191C26;
+    --border:  #2A2E40;
+    --text:    #E0E4F0;
+    --muted:   #8890A8;
+    color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'EB Garamond', 'Times New Roman', serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--bg);
+  max-width: 980px;
+  margin-inline: auto;
+  padding-inline: 32px;
+  padding-block: 56px;
+}
+
+/* ── HEADER ── */
+.page-header {
+  text-align: center;
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-title {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.page-subtitle {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  font-style: italic;
+  color: var(--maroon);
+  margin-top: 6px;
+}
+
+.page-meta {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 14px;
+}
+
+/* ── SECTION ── */
+.section { margin-bottom: 44px; }
+
+.section-heading {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── HIGHLIGHTS ── */
+.highlights {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 24px 28px;
+}
+
+.highlights ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.highlights li {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text);
+  padding-left: 1.3em;
+  position: relative;
+}
+
+.highlights li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--muted);
+}
+
+.groups {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.group-chip {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--navy);
+  border: 1px solid var(--navy);
+  border-radius: 3px;
+  padding: 2px 10px;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+/* ── TABLE ── */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 580px;
+  font-size: 1rem;
+}
+
+thead th {
+  background: var(--navy);
+  color: #fff;
+  padding: 11px 16px;
+  text-align: left;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  font-size: 0.73rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-right: 1px solid rgba(255,255,255,0.12);
+}
+
+thead th:last-child { border-right: none; }
+
+/* week band rows */
+tbody tr.week-row td {
+  background: var(--surface);
+  color: var(--muted);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+tbody tr { border-bottom: 1px solid var(--border); }
+tbody tr:last-child { border-bottom: none; }
+
+tbody td {
+  padding: 11px 16px;
+  vertical-align: middle;
+  color: var(--text);
+  border-right: 1px solid var(--border);
+}
+
+tbody td:last-child { border-right: none; }
+
+/* # column */
+tbody td:first-child {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  text-align: center;
+  width: 48px;
+}
+
+/* event name */
+tbody td:nth-child(2) { font-weight: 500; }
+
+/* time */
+tbody td:nth-child(4) {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+/* location */
+tbody td:nth-child(5) {
+  color: var(--muted);
+  font-size: 0.97rem;
+  font-style: italic;
+}
+
+.tag-deadline {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--maroon);
+  text-transform: uppercase;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* ── QUOTES ── */
+.quotes {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.quote-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+
+.quote-text {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.08rem;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.quote-attr {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--navy);
+  text-transform: uppercase;
+}
+
+@media (max-width: 540px) {
+  body { padding-inline: 18px; padding-block: 36px; }
+  .highlights { padding: 20px 18px; }
+}
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1 class="page-title">Condensed Matter (B6) Tutorial</h1>
+  <p class="page-subtitle">Aikya Banerjee</p>
+  <p class="page-meta">Merton College, Oxford &nbsp;·&nbsp; Michaelmas 2026</p>
+</header>
+
+<section class="section">
+  <p class="section-heading">Course Information</p>
+  <div class="highlights">
+    <ul>
+      <li>Welcome to B6 tutorials at Merton. For any query please email <strong>@merton.ox.ac.uk</strong>.</li>
+      <li>Submit problem set solutions before the deadline — use subject line <strong>B6-PS{number}</strong>.</li>
+      <li>To flag a question for class discussion, email with subject <strong>B6-question</strong>.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <p class="section-heading">Schedule</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Event</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Location</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr class="week-row"><td colspan="6">Week 2</td></tr>
+        <tr>
+          <td>1</td>
+          <td>Problem Set 1</td>
+          <td>Tuesday</td>
+          <td>23:59<span class="tag-deadline">Deadline</span></td>
+          <td>Submit over email</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Tutorial 1</td>
+          <td>Friday</td>
+          <td>12:00–13:00 &amp; 14:00–17:00</td>
+          <td>TBC</td>
+          <td></td>
+        </tr>
+
+        <tr class="week-row"><td colspan="6">Week 3</td></tr>
+        <tr>
+          <td>3</td>
+          <td>Class 1</td>
+          <td>Friday</td>
+          <td>16:00–17:30</td>
+          <td>TBC</td>
+          <td></td>
+        </tr>
+
+        <tr class="week-row"><td colspan="6">Week 4</td></tr>
+        <tr>
+          <td>4</td>
+          <td>Problem Set 2</td>
+          <td>Tuesday</td>
+          <td>23:59<span class="tag-deadline">Deadline</span></td>
+          <td>Submit over email</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Tutorial 2</td>
+          <td>Friday</td>
+          <td>12:00–13:00 &amp; 14:00–17:00</td>
+          <td>TBC</td>
+          <td></td>
+        </tr>
+
+        <tr class="week-row"><td colspan="6">Week 5</td></tr>
+        <tr>
+          <td>6</td>
+          <td>Class 2</td>
+          <td>Friday</td>
+          <td>16:00–17:30</td>
+          <td>TBC</td>
+          <td></td>
+        </tr>
+
+        <tr class="week-row"><td colspan="6">Week 6</td></tr>
+        <tr>
+          <td>7</td>
+          <td>Problem Set 3</td>
+          <td>Tuesday</td>
+          <td>23:59<span class="tag-deadline">Deadline</span></td>
+          <td>Submit over email</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Tutorial 3</td>
+          <td>Friday</td>
+          <td>12:00–13:00 &amp; 14:00–17:00</td>
+          <td>TBC</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Class 3</td>
+          <td>Friday</td>
+          <td>17:00–18:30</td>
+          <td>TBC</td>
+          <td></td>
+        </tr>
+
+        <tr class="week-row"><td colspan="6">Week 7</td></tr>
+        <tr>
+          <td>10</td>
+          <td>Problem Set 4</td>
+          <td>Tuesday</td>
+          <td>23:59<span class="tag-deadline">Deadline</span></td>
+          <td>Submit over email</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Tutorial 4</td>
+          <td>Friday</td>
+          <td>12:00–13:00 &amp; 14:00–17:00</td>
+          <td>TBC</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Class 4</td>
+          <td>Friday</td>
+          <td>17:00–18:30</td>
+          <td>TBC</td>
+          <td></td>
+        </tr>
+
+        <tr class="week-row"><td colspan="6">Vacation</td></tr>
+        <tr>
+          <td>13</td>
+          <td>Vacation Work</td>
+          <td>TBC</td>
+          <td>TBC</td>
+          <td>Submit over email</td>
+          <td></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="quotes">
+  <div class="quote-item">
+    <p class="quote-text">"A method is more important than a discovery, since the right method will lead to new and even more important discoveries."</p>
+    <p class="quote-attr">Lev Landau</p>
+  </div>
+  <div class="quote-item">
+    <p class="quote-text">"More is different."</p>
+    <p class="quote-attr">P. W. Anderson</p>
+  </div>
+</section>
+
+</body>
+</html>
